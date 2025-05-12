@@ -6,7 +6,7 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export default function TodoInput({ todo, onToggle, onDelete }: Props) {
+export default function TodoItem({ todo, onToggle, onDelete }: Props) {
   return (
     <li>
       <label>
