@@ -9,7 +9,6 @@ export default function App() {
 
   const addTodo = (title: string) => {
     setTodos([...todos, { id: uuidv4(), title, done: false }]);
-    console.log(todos);
   };
 
   const toggleTodo = (id: string) => {
