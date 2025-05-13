@@ -26,7 +26,7 @@ export default function TodoInput({ onAdd }: Props) {
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
           placeholder="할 일을 입력하세요"
-          className="border p-2 rounded flex-grow"
+          className="border border-white text-white p-2 rounded flex-grow"
         />
         <button
           onClick={handleSubmit}
@@ -40,8 +40,8 @@ export default function TodoInput({ onAdd }: Props) {
           <div
             key={key}
             onClick={() => setColorKey(key as keyof typeof colorMap)}
-            className={`w-6 h-6 rounded-full cursor-pointer border ${
-              colorKey === key ? "ring-1 ring-black" : ""
+            className={`w-6 h-6 rounded-full cursor-pointer border border-green-950 ${
+              colorKey === key ? "ring-2 ring-white" : ""
             } ${colorMap[key as keyof typeof colorMap].bg}`}
           />
         ))}

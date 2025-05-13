@@ -32,9 +32,9 @@ export default function App() {
   };
 
   return (
-    <main>
-      <div>
-        <h1>오늘의 할일</h1>
+    <main className="min-h-screen bg-green-950 p-6">
+      <div className="max-w-5xl mx-auto bg-green-800 rounded-xl p-8 shadow-inner">
+        <h1 className="text-white text-3xl font-bold mb-6">오늘의 할 일</h1>
         <TodoInput onAdd={addTodo} />
         <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
       </div>

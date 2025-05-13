@@ -9,7 +9,7 @@ interface Props {
 
 export default function TodoList({ todos, onToggle, onDelete }: Props) {
   return (
-    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
