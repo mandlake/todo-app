@@ -1,3 +1,4 @@
+import { colorMap } from "../constants/colorMap";
 import type { Todo } from "../types/todo";
 
 interface Props {
@@ -7,11 +8,12 @@ interface Props {
 }
 
 export default function TodoItem({ todo, onToggle, onDelete }: Props) {
-  const colorClass = todo.color || "bg-yellow-100";
+  const colorKey = todo.colorKey || "yellow";
+  const { bg, text } = colorMap[colorKey as keyof typeof colorMap];
 
   return (
     <li
-      className={`w-40 h-40 ${colorClass} rounded-lg shadow-md p-3 flex flex-col justify-between hover:scale-105 transition-transform duration-150`}
+      className={`w-40 h-40 ${bg} rounded-lg shadow-md p-3 flex flex-col justify-between hover:scale-105 transition-transform duration-150`}
     >
       <label className="flex flex-col space-y-2">
         <input
@@ -21,8 +23,8 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
           className="self-start"
         />
         <span
-          className={`break-words ${
-            todo.done ? "line-through text-gray-400" : "text-gray-800"
+          className={`break-words ${text} ${
+            todo.done ? "line-through opacity-50" : ""
           }`}
         >
           {todo.title}
@@ -30,7 +32,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
       </label>
       <button
         onClick={() => onDelete(todo.id)}
-        className="text-sm text-red-500 hover:text-red-700 self-end"
+        className="text-sm text-red-400 hover:text-red-500 self-end"
       >
         삭제
       </button>

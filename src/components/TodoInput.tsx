@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { colorMap } from "../constants/colorMap";
 
 interface Props {
   onAdd: (text: string, color?: string) => void;
@@ -8,11 +9,11 @@ interface Props {
 
 export default function TodoInput({ onAdd }: Props) {
   const [text, setText] = useState("");
-  const [color, setColor] = useState("");
+  const [colorKey, setColorKey] = useState<keyof typeof colorMap>("yellow");
 
   const handleSubmit = () => {
     if (text.trim()) {
-      onAdd(text, color);
+      onAdd(text, colorKey);
       setText("");
     }
   };
@@ -29,23 +30,21 @@ export default function TodoInput({ onAdd }: Props) {
         />
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white px-4 rounded"
+          className={`${colorMap[colorKey].bg} ${colorMap[colorKey].button} px-4 py-2 rounded shadow`}
         >
           추가
         </button>
       </div>
       <div className="flex space-x-2">
-        {["bg-yellow-100", "bg-pink-100", "bg-green-100", "bg-blue-100"].map(
-          (c) => (
-            <div
-              key={c}
-              onClick={() => setColor(c)}
-              className={`w-6 h-6 rounded-full cursor-pointer border ${
-                color === c ? "ring-2 ring-black" : ""
-              } ${c}`}
-            />
-          )
-        )}
+        {Object.keys(colorMap).map((key) => (
+          <div
+            key={key}
+            onClick={() => setColorKey(key as keyof typeof colorMap)}
+            className={`w-6 h-6 rounded-full cursor-pointer border ${
+              colorKey === key ? "ring-1 ring-black" : ""
+            } ${colorMap[key as keyof typeof colorMap].bg}`}
+          />
+        ))}
       </div>
     </div>
   );

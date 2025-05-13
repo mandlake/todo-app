@@ -3,5 +3,5 @@ export interface Todo {
   id: string;
   title: string;
   done: boolean;
-  color?: string;
+  colorKey?: string; // ex: "yellow", "pink"
 }
