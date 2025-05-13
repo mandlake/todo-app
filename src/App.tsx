@@ -7,8 +7,16 @@ import type { Todo } from "./types/todo";
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = (title: string) => {
-    setTodos([...todos, { id: uuidv4(), title, done: false }]);
+  const addTodo = (title: string, color?: string) => {
+    setTodos([
+      ...todos,
+      {
+        id: uuidv4(),
+        title,
+        done: false,
+        color: color || "bg-yellow-100", // 색상 지정 없으면 기본 노랑
+      },
+    ]);
   };
 
   const toggleTodo = (id: string) => {

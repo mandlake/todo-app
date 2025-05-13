@@ -7,16 +7,11 @@ interface Props {
 }
 
 export default function TodoItem({ todo, onToggle, onDelete }: Props) {
-  const colors = [
-    "bg-yellow-100",
-    "bg-pink-100",
-    "bg-green-100",
-    "bg-blue-100",
-  ];
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const colorClass = todo.color || "bg-yellow-100";
+
   return (
     <li
-      className={`w-40 h-40 ${randomColor} rounded-lg shadow-md p-3 flex flex-col justify-between hover:scale-105 transition-transform duration-150`}
+      className={`w-40 h-40 ${colorClass} rounded-lg shadow-md p-3 flex flex-col justify-between hover:scale-105 transition-transform duration-150`}
     >
       <label className="flex flex-col space-y-2">
         <input
