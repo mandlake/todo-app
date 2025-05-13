@@ -24,7 +24,7 @@ export default function TodoInput({ onAdd }: Props) {
         onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
         placeholder="할 일을 입력하세요."
       />
-      <button>추가</button>
+      <button onClick={handleSubmit}>추가</button>
     </div>
   );
 }
