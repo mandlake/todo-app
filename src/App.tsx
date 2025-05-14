@@ -1,42 +1,43 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
-import type { Todo } from "./types/todo";
+"use client";
+
+import { useEffect, useState } from "react";
+import { initGoogleClient } from "./google/googleClient";
+import { signInWithGoogle } from "./google/googleLogin";
+import { fetchTodayEvents } from "./google/fetchTodayEvents";
 
 export default function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<{ id: string; title: string }[]>([]);
 
-  const addTodo = (title: string, colorKey?: string) => {
-    setTodos([
-      ...todos,
-      {
-        id: uuidv4(),
-        title,
-        done: false,
-        colorKey: colorKey || "yellow", // 기본은 노랑
-      },
-    ]);
-  };
+  useEffect(() => {
+    initGoogleClient();
+  }, []);
 
-  const toggleTodo = (id: string) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
-    );
-  };
-
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const handleLoginAndFetch = async () => {
+    await signInWithGoogle();
+    const events = await fetchTodayEvents();
+    setTodos(events);
   };
 
   return (
-    <main className="min-h-screen bg-green-950 p-6">
-      <div className="max-w-5xl mx-auto bg-green-800 rounded-xl p-8 shadow-inner">
-        <h1 className="text-white text-3xl font-bold mb-6">오늘의 할 일</h1>
-        <TodoInput onAdd={addTodo} />
-        <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+    <main className="min-h-screen bg-green-950 p-6 text-white">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-3xl font-bold mb-4">오늘의 캘린더 일정</h1>
+        <button
+          onClick={handleLoginAndFetch}
+          className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 mb-4"
+        >
+          Google 로그인 및 일정 불러오기
+        </button>
+        <ul className="space-y-2">
+          {todos.map((todo) => (
+            <li
+              key={todo.id}
+              className="bg-yellow-100 text-black px-4 py-2 rounded shadow"
+            >
+              {todo.title}
+            </li>
+          ))}
+        </ul>
       </div>
     </main>
   );
