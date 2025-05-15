@@ -35,3 +35,55 @@ Google Calendar와 연동되는 포스트잇 스타일의 To-Do 리스트 앱입
 ---
 
 ## 📁 프로젝트 구조
+
+```bash
+src/
+├── components/ # To-Do UI 구성 요소 (입력창, 리스트, 아이템)
+│ ├── TodoInput.tsx
+│ ├── TodoList.tsx
+│ └── TodoItem.tsx
+├── google/ # Google Calendar API 연동 로직
+│ ├── googleClient.ts
+│ └── fetchTodayEvents.ts
+├── types/ # TypeScript 인터페이스 정의
+│ ├── todo.ts
+│ └── calendarEvents.ts
+├── App.tsx # 전체 앱 통합 및 상태 관리
+└── main.tsx # 진입점
+```
+
+---
+
+### 🔍 폴더 설명
+
+- `components/`: 할 일 입력, 목록, 단일 항목 등 UI 단위 컴포넌트
+- `google/`: Google API 초기화 및 오늘의 일정 불러오기 로직
+- `types/`: `Todo`, `CalendarEvent` 등 명시적인 타입 정의 파일
+- `App.tsx`: 전체 앱 UI 및 상태 관리 로직 포함
+- `main.tsx`: Vite 기반 프로젝트의 엔트리 포인트
+
+---
+
+## 🚀 실행 방법
+
+```bash
+# 패키지 설치
+npm install
+
+# 개발 서버 실행
+npm run dev
+
+# 브라우저에서 http://localhost:5173 접속
+
+```
+
+---
+
+## 🔑 환경 변수 설정 (.env)
+
+Google Calendar API를 사용하기 위해 아래 환경 변수를 `.env` 파일에 설정해야 합니다:
+
+```bash
+VITE_GOOGLE_CLIENT_ID=your_google_oauth_client_id
+VITE_GOOGLE_API_KEY=your_google_api_key
+```
