@@ -68,10 +68,10 @@ src/
 
 ```bash
 # 패키지 설치
-npm install
+pnpm install
 
 # 개발 서버 실행
-npm run dev
+pnpm run dev
 
 # 브라우저에서 http://localhost:5173 접속
 
